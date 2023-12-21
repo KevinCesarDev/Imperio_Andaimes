@@ -1,0 +1,32 @@
+@model UsuarioModel
+@{
+    ViewData["Title"] = "Alterar";
+}
+
+<div class="Card">
+    <p class="Title text-center">Alterar Dados</p>
+    <form  method="post" asp-action="Alterar" asp-controller="Home" onsubmit="return verificarNovosDados()">
+        <div class="container Over p-3">
+            <input type="hidden" value="@Model.Id" asp-for="@Model.Id">
+            <input type="hidden" value="@Model.IdConta" asp-for="@Model.IdConta">
+            <input type="hidden" value="@Model.EmailUsuario" asp-for="@Model.EmailUsuario">
+            <input type="hidden" value="@Model.Senha" asp-for="@Model.Senha">
+            <div class="mb-3">
+                <label for="nome" class="form-label fs-5 Roboto">Nome:</label>
+                <input type="text" class="form-control fs-5" id="nome" asp-for="@Model.NomeUsuario" value="@Model.NomeUsuario">
+            </div>
+            <div class="mb-3">
+                <label for="novaSenha" class="form-label fs-5 Roboto">Nova senha:</label>
+                <input type="password" class="form-control fs-5" id="novaSenha" name="novaSenha">
+            </div>
+            <div class="mb-3">
+                <label for="confirmarNovaSenha" class="form-label fs-5 Roboto">Confirmar nova senha:</label>
+                <input type="password" class="form-control fs-5" id="confirmarNovaSenha" name="confirmarNovaSenha">
+            </div>
+            <div class="botoes d-flex justify-content-between">
+                <a asp-area="" asp-controller="Home" asp-action="Usuario" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Confimar</button>
+            </div>
+        </div>
+    </form>
+</div>

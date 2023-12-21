@@ -1,0 +1,12 @@
+﻿@{
+    Layout = "_Layout";
+    string nomeCompleto = User.Identity.Name;
+    @if(nomeCompleto != null){
+        string[] partesDoNome = nomeCompleto.Split(' ');
+        string primeiroNome = partesDoNome.Length > 0 ? partesDoNome[0] : string.Empty;
+        ViewBag.Nome = primeiroNome;
+        ViewBag.NomeCompleto = nomeCompleto;
+        ViewBag.TipoConta = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value; 
+        ViewBag.Email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value; 
+    }
+}

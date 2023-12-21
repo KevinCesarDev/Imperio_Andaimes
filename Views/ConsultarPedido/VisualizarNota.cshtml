@@ -1,0 +1,128 @@
+@model EstoquePedidoNotaModel
+@{
+    ViewData["Title"] = "Visualizar";
+}
+
+<div class="Card">
+    <div class="Over container h-100 p-5 overflow-auto">
+        <div class="text-center ">
+    <form asp-action="BaixarNota" class="FormMobile" asp-controller="ConsultarPedido">
+        <div class="d-flex justify-content-evenly FormMobile">
+            <input type="hidden" value="@Model.NovaNota.Id" asp-for="@Model.NovaNota.Id">
+            <div class="mb-3 w-100 me-3 FormMobile">
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.Nome" id="nome"
+                    asp-for="@Model.NovaNota.Nome" readonly>
+            </div>
+            <div class="w-100 me-3 FormMobile">
+                <label for="CNPJ_CPF" class="form-label">CNPJ / CPF:</label>
+                <input type="number" class="form-control text-center" value="@Model.NovaNota.CPF_CNPJ"
+                    asp-for="@Model.NovaNota.CPF_CNPJ" id="CNPJ_CPF" readonly>
+            </div>
+
+            <div class="w-50 FormMobile">
+                <label for="Telefone" class="form-label">Telefone:</label>
+                <input type="number" class="form-control text-center" value="@Model.NovaNota.Telefone"
+                    asp-for="@Model.NovaNota.Telefone" id="Telefone" readonly>
+            </div>
+        </div>
+        <div class="d-flex justify-content-evenly FormMobile">
+            <div class="w-100 me-3 FormMobile">
+                <label for="Data_aluguel" class="form-label">Data da nota:</label>
+                <input type="date" class="form-control text-center" value="@Model.NovaNota.DataEmissao.ToString("yyyy-MM-dd")"
+                    asp-for="@Model.NovaNota.DataEmissao" id="Data_aluguel" readonly>
+            </div>
+            <div class="w-100 mb-3 FormMobile">
+                <label for="Data_recolhimento" class="form-label">Data de recolhimento:</label>
+
+                <input type="date" class="form-control text-center" value="@Model.NovaNota.DataRecolhimento.ToString("yyyy-MM-dd")"
+                    asp-for="@Model.NovaNota.DataRecolhimento" id="Data_recolhimento" readonly>
+            </div>
+        </div>
+
+        <div class="mb-3 text-center d-flex flex-column">
+            <label for="produtos" class="form-label">Produtos Solicitados:</label>
+            <div class=" d-flex justify-content-evenly ">
+                @for (int i = 0; i < @Model.Pedidos.Count; i++)
+                {
+                    @for (int j = 0; j < @Model.Estoque.Count; j++)
+                    {
+                        @if (@Model.Pedidos[i].IdProduto == @Model.Estoque[j].Id)
+                        {
+                            <div class="">
+                                <label>@Model.Estoque[j].Nome</label>
+                                <input type="number" class="form-control text-center" value="@Model.Pedidos[i].Quantidade"
+                                    asp-for="@Model.Pedidos[i].Quantidade" readonly>
+                            </div>
+                        }
+                    }
+                }
+            </div>
+        </div>
+        <div class="d-flex justify-content-evenly FormMobile">
+            <div class="w-100 FormMobile">
+                <label for="valor_total" class="form-label">Valor Total:</label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.ValorTotal"
+                    asp-for="@Model.NovaNota.ValorTotal" id="valor_total" readonly>
+            </div>
+        </div>
+        <div class="d-flex justify-content-evenly FormMobile">
+            <div class="w-50 me-3 FormMobile">
+                <label for="cep" class="form-label">CEP:</label>
+                <input type="number" class="form-control " value="@Model.NovaNota.Cep" asp-for="@Model.NovaNota.Cep"
+                    id="cep" readonly>
+            </div>
+            <div class="w-50 me-3 FormMobile">
+                <label for="bairro" class="form-label">Cidade:</label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.Cidade" asp-for="@Model.NovaNota.Cidade"
+                    id="bairro" readonly>
+            </div>
+            <div class="w-50 me-3 FormMobile">
+                <label for="bairro" class="form-label">Bairro:</label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.Bairro" asp-for="@Model.NovaNota.Bairro"
+                    id="bairro" readonly>
+            </div>
+            <div class="w-100 me-3 FormMobile">
+                <label for="rua" class="form-label">Rua / Logadouro:</label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.Rua" asp-for="@Model.NovaNota.Rua"
+                    id="rua" readonly>
+            </div>
+            <div class="w-10 me-3 FormMobile">
+                <label for="numCasa" class="form-label">Número: </label>
+                <input type="number" class="form-control text-center" value="@Model.NovaNota.Numero"
+                    asp-for="@Model.NovaNota.Numero" id="numCasa" readonly>
+            </div>
+            <div class="w-50 FormMobile">
+                <label for="complemento" class="form-label">Complemento: </label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.Complemento"
+                    asp-for="@Model.NovaNota.Complemento" id="complemento" readonly>
+            </div>
+        </div>
+        <div class="d-flex justify-content-evenly FormMobile">
+            <div class="w-100 me-3">
+                <label for="taxaEntrega" class="form-label">Taxa de Entrega:</label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.TaxaEntrega"
+                    asp-for="@Model.NovaNota.TaxaEntrega" id="taxaEntrega" readonly>
+            </div>
+            <div class="w-100 FormMobile">
+                <label for="pagPrevio" class="form-label">Pagamento Prévio: </label>
+                <input type="text" class="form-control text-center" value="@Model.NovaNota.ValorPago"
+                    asp-for="@Model.NovaNota.ValorPago" id="pagPrevio" readonly>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end FormMobile">
+            <input type="hidden" value="@Model.NovaNota.StatusNota" asp-for="@Model.NovaNota.StatusNota">
+            @if (@Model.NovaNota.StatusNota)
+            {
+                <button type="submit" class="btn btn-success mt-3">Fechar Nota</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-danger mt-3" readonly>Nota Fechada</button>
+            }
+        </div>
+    </form>
+
+</div>
+    </div>
+</div>

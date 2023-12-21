@@ -1,0 +1,606 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+:root{
+  --border-radius: 12px;
+  --primary-1: #FFF;
+  --primary-2: #E5E5E5;
+  --primary-3: #DADADA;
+  --contrast-3: ;
+  --contrast-4: #545c60;
+  --highlight-1: #7075D0;
+  --highlight-2: #5D62B5;
+  --highlight-3: #4B50A3;
+  --success: #61B937;
+  --error: #CB3F3F;
+  --success-2: #68de32;
+  --error-2: #ea3030;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+a{
+  text-decoration: none!important;
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+#vertical_line{
+  background-color: black;
+  width: 2px;
+  height: 50px;
+  border-radius: 50px;
+}
+#bolinhaVerde{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: green;
+  margin: 0 0 16px 10px;
+}
+.escondido{
+  display: none;
+}
+#bolinhaAmarela{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: yellow;
+  margin: 0 0 16px 10px;
+}
+#bolinhaVermelha{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: red;
+  margin: 0 0 16px 10px;
+}
+.logo{
+  max-width: 96px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  display: flex; 
+  flex-direction: column;
+}
+
+#map {
+  width: 400px; height: 400px; background: #ddd;
+}
+
+.Card{
+  display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border-radius: 4px;
+    background: var(--primary-3);
+    max-height: 87.5vh;
+}
+input{
+  border-radius: 12px;
+  border: none;
+}
+.Title{
+  color: var(--contrast-3);
+  text-align: start;
+  font-family: 'Roboto', 'sans-serif';
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: normal;
+}
+
+.Chart{
+  display: flex;
+  width: 100%;
+  gap: 12px;
+}
+
+.CardItens{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.PedidoLista{
+  gap: 10px;
+}
+
+.PedidoCard{
+  border-radius: 12px;
+  width: 223.672px;
+  height: 224px;
+    @media screen and (max-width: 600px) {
+      max-width: 170px!important;
+    }
+}
+
+.RelatorioBusca{
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.Relatorio{
+  background-color: var(--primary-1);
+  border-radius: 12px;
+    @media screen and (max-width: 600px) {
+      margin: 0!important;
+      width: 100%!important;
+    }
+}
+
+.Table{
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    align-self: stretch;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.Tbody{
+  
+  padding: 15px 10px;
+}
+.TableRows{
+    padding: 15px 10px;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+    border-radius: 8px;
+}
+
+.Th{
+    color: var(--contrast-3);
+    text-align: start;
+    font-family: inherit;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.Td{
+    color: var(--contrast-3);
+    font-family: 'Roboto';
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 121px;
+    align-items: center;
+}
+.desktop{
+  @media only screen and (max-width: 600px){
+    display: none!important;
+  }
+}
+.mobile{
+  @media only screen and (min-width: 600px){
+    display: none!important;
+  }
+}
+
+.Flex-1-0-0{
+  
+  flex: 1 0 0;
+}
+
+.Over{
+  max-height: 70vh;
+  margin-bottom: 20px;
+  background-color: var(--primary-2);
+  border-radius: 12px;
+  font-family: 'Roboto';
+}
+
+.Botao{
+  padding: 0 15px;
+  width: 50%;
+}
+
+.Roboto{
+  font-family: 'Roboto';
+  font-weight: 600;
+}
+
+.Logout{
+  background: var(--highlight-3)!important;
+  color: var(--primary-1);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.Logout:hover{
+  transform: scale(1.03);
+  background: var(--highlight-2)!important;
+  color: var(--primary-1);
+  cursor: pointer;
+}
+
+.Filter{
+  padding: 10px 15px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.None{
+  display: none;
+}
+
+.User{
+  display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 8px;
+    background: var(--primary-3);
+    color: var(--contrast-3);
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.Usuario{
+  display: flex;
+    padding: 16px;
+    justify-content: center;
+    align-items: center;
+    align-self: stretch;
+    border-radius: 8px;
+    background: var(--primary-3);
+    color: var(--contrast-3);
+    transition: 0.3s;
+    border: none;
+}
+
+.User:hover{
+  transform: scale(1.03);
+  background: var(--primary-1);
+  color: var(--contrast-3)!important;
+}
+
+.MenuItem{
+  background: var(--highlight-3)!important;
+    &:hover{
+      color: #343B3F!important;
+    }
+}
+
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bd-violet-bg);
+  --bs-tooltip-color: var(--bs-white);
+}
+
+.LoginContainer{
+overflow: hidden;
+position: relative;
+font-family: inherit;
+display: flex;
+background-color: var(--primary-2);
+border-radius: 10px;
+align-items: center;
+justify-content: space-between;
+width: 100%;
+height: 100%;
+gap: 50px;
+padding: 20px;
+    @media screen and (max-width: 800px) {
+        height: 100%;
+        padding: 0px;
+        border-radius: 0px;
+    }
+}
+
+.Background{
+object-fit: cover;
+object-position: center;
+display: flex;
+bottom: -562px;
+top: -432px;
+left: -242px;
+right: 217px;
+position: absolute;
+width: 1464.955px;
+height: 2018.237px;
+    @media screen and (max-width: 800px) {
+        display: none;
+    }
+  }
+
+.Textos{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.Descricao{
+  color: var(--contrast-3);
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+.TelaLoginTitle{
+  color: var(--contrast-3);
+  font-size: 5em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  align-self: stretch;
+}
+.LeftInformations{
+  z-index: 10;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+      @media screen and (max-width : 800px){
+          display: none;
+      }
+}
+.Main{
+  display: flex;
+  width: 75%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+  padding-left: 50px;
+}
+
+.Form{
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding-left: 64px;
+        @media screen and (max-width: 800px){
+            width: 100%;
+            padding-right: 64px
+        }
+}
+.Input{
+    padding: 0 10px 0 10px;
+    height: 40px;
+    align-self: stretch;
+    border-radius: 8px;
+    background: var(--primary-1);
+    width: 100%;
+    border: none;
+    font-size: 1.2em;
+    font-family: inherit;
+}
+.Label{
+    color: var(--primary-1);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    align-self: flex-start;
+}
+.LoginTitle{
+    color: var(--primary-1);
+    font-size: 5em;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    align-self: stretch;
+}
+.RightInformation{
+    align-self: flex-end;
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    min-width: 420px;
+    background-color: var(--highlight-2);
+    @media screen and (min-width : 800px){
+            height: 896px;
+            justify-content: space-between;
+            border-radius: 32px 0px 0px 32px;
+            align-items: center;
+        }
+}
+.RightDetails{
+    width: 48px;
+    height: 100%;
+    background: var(--highlight-3);
+        @media screen and (max-width : 800px){
+            display: none;
+        }
+    
+}
+.BotaoLogin{
+    height: 40px;
+    align-self: stretch;
+    border-radius: 8px;
+    background: var(--highlight-3);
+    width: 100%;
+    border: none;
+    color: var(--primary-1);
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover{
+        transform: scale(1.03);
+        background-color: var(--primary-1);
+        color: black;
+    }
+}
+.Form{
+    display: flex;
+    width: 75%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding-left: 64px;
+        @media screen and (max-width: 900px){
+            width: 100%;
+            padding-right: 64px
+        }
+      }
+
+  .SVG{
+  object-fit: cover;
+  object-position: center;
+  position: absolute;
+  width: 814px;
+  height: 782px;
+  transform: rotate(-139.356deg);
+  flex-shrink: 0;
+  fill: var(--primary-3);
+  top: 895px;
+  right: 338px;}
+
+  .SVG2{
+    object-fit: cover;
+    object-position: center;
+    bottom: 1069px;
+    left: 515px;
+    position: absolute;
+    width: 715px;
+    height: 714px;
+    transform: rotate(155.003deg);
+    flex-shrink: 0;
+    fill: var(--primary-3);
+  }
+
+  body{
+    margin: 0;
+  }
+
+  .MenuMobile{
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--highlight-2);
+    height: 120px;
+    position: fixed;
+      @media screen and (min-width: 600px) {
+        display: none;
+      }
+  }
+
+  .BodyMobile{
+    @media screen and (max-width: 600px) {
+      margin-top: 120px;
+    }
+  }
+
+  .LogoutMobile{
+    border-radius: 12px;
+    box-shadow: var(--contrast-3) 0px 4px 10px;
+  }
+  .AumentoMobile{
+    @media screen and (max-width: 600px) {
+      width: 100%;
+    }
+  }
+
+  .BurguerClicked{
+    z-index: 10;
+    background-color: #343b3f90;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+  }
+  .BurguerMenu{
+    z-index: 5;
+    background-color: var(--highlight-2);
+    width: 50%;
+    height: 100%;
+  }
+
+  .MenuBar{
+    width: 90%;
+    font-size: 1.5rem;
+    color: var(--primary-1);
+    padding: 10px;
+    transition: 0.3s;
+    border-bottom: 2px solid #fff;
+    font-family: 'Roboto';
+    font-weight: 500;
+    margin-left: 5%;
+  }
+  .ContainerMobile{
+    @media screen and(max-width: 600px) {
+        width: 80%!important;
+    }
+  }
+
+  .FormMobile{
+    @media screen and (max-width: 600px){
+      display: flex!important;
+      flex-direction: column!important;
+      width: 100%!important;
+    }
+  }
+
+  .Bold{
+    font-weight: 600;
+  }
+
+  .Reabilitar{
+    &&:hover{
+      background-color: var(--success)!important;
+      color: var(--primary-1);
+      border-color: var(--success)!important;
+    }
+  }
+
+  .LogoPosition{
+    margin-left: 48px;
+    top: 10%;
+    position: absolute;
+    @media screen and (max-width: 800px) {
+      margin-left: 0;
+    }
+  }
+
+  .Stock{
+    font-family: 'Montserrat';
+    font-weight: 300;
+    border-bottom: 2px solid #fff;
+      &&#Subtitle{
+        font-weight: 300;
+        border: none;
+      }
+      @media screen and (max-width: 800px) {
+        display: none;
+      }
+      @media screen and (max-height: 890px) {
+        display: none;
+      }
+  }
+  
+  .Erro{
+    font-weight: 600;
+    color: rgb(114, 34, 34);
+  }

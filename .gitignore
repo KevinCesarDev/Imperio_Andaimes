@@ -1,0 +1,7 @@
+#pasta obj
+/obj
+/bin
+
+#config de acesso ao banco
+./appsettings.Development.json
+./appsettings.json

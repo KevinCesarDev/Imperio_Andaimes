@@ -1,0 +1,71 @@
+﻿@model EstoquePedidoNotaModel
+
+@{
+  ViewData["Title"] = "Criar pedido";
+
+
+
+  var cont = 1;
+}
+
+<div class="Card">
+  <p class="Title">Novo Pedido</p>
+
+
+  <form class="w-100 d-flex flex-column" asp-action="NovoPedido" onsubmit="return verificarCamposVazios()"
+  asp-controller="NovoPedido" method="post">
+    <div class="d-flex Over overflow-auto container">
+      <table class="Table">
+        <tbody class="w-100 d-flex Tbody flex-column">
+          <tr class="TableRows d-flex w-100">
+            <th class="Th Flex-1-0-0 text-start">Nome</th>
+            <th class="Th text-center desktop">Disponíveis</th>
+            <th class="Th text-center desktop">Valor unidade</th>
+          </tr>
+          @if (Model != null && Model.Estoque.Any())
+
+
+
+          {
+            @foreach (var item in Model.Estoque)
+
+
+
+            {
+              <input class="escondido" type="number" value="@item.Id" asp-for="@Model.Pedidos[cont-1].IdProduto">
+              <tr class="TableRows justify-content-evenly d-flex">
+                <td class="Td Flex-1-0-0 text-start fs-5">@item.Nome</td>
+                <td class="Td fs-5">
+                  <input type="number" class="form-control text-center" asp-for="@Model.Pedidos[cont-1].Quantidade"
+                    id="@item.Id" placeholder="0" min="0" max="@Model.Estoque[cont-1].Disponiveis"
+                    oninput="calcularValorTotal('@cont-valorUnidade',@item.Id,'@cont-lista','valorTotal',@Model.Estoque.Count)">
+                </td>
+                <td class="Td text-center fs-5 desktop">@item.Disponiveis</td>
+                <input type="hidden" name="" id="qtdEstoque" value="@Model.Estoque[cont-1].Disponiveis" readonly>
+                <td class="Td text-center fs-5 desktop">R$ <span id="@cont-valorUnidade">@item.ValorUnid</span></td>
+                <input type="hidden" id="@cont-lista">
+              </tr>
+              cont++;
+
+
+
+            }
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="px-5 align-items-center d-flex justify-content-around w-100">
+      <button class="btn btn-success fs-5" type="submit">Gerar Nota</button>
+      @if (TempData["Erro"] != null)
+      {
+        <div class="alert alert-danger">
+          @TempData["Erro"]
+        </div>
+      }
+
+      <h3 class="d-flex">Total = R$<p id="valorTotal">0,00</p>
+      </h3>
+    </div>
+  </form>
+  <div>

@@ -1,0 +1,139 @@
+@model EstoquePedidoNotaModel
+@{
+  ViewData["Title"] = "Nova Nota";
+}
+
+<div class="Card">
+  <p class="Title">Novo pedido</p>
+  <div class="text-center">
+    <form method="post" asp-action="CadastrarNota" asp-controller="novoPedido">
+      <div class="container Over overflow-auto">
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome:</label>
+          <input type="text" asp-for="@Model.NovaNota.Nome" class="form-control" id="nome">
+        </div>
+        <div class="mb-3">
+          <label for="CNPJ_CPF" class="form-label">CNPJ / CPF:</label>
+          <input type="text" asp-for="@Model.NovaNota.CPF_CNPJ" oninput="validarNumeros('CPF_CNPJ')" class="form-control" id="CPF_CNPJ">
+        </div>
+        <div class="mb-3">
+          <label for="Telefone" class="form-label">Telefone:</label>
+          <input type="text" asp-for="@Model.NovaNota.Telefone" class="form-control" oninput="validarNumeros('Telefone')" id="Telefone">
+        </div>
+        <div class="d-flex w-100 gap-5 justify-content-center">
+          <div class="mb-3">
+            <label for="Data_aluguel" class="">Data da nota:</label>
+            <input type="date" asp-for="@Model.NovaNota.DataEmissao" class="form-control" id="Data_aluguel"
+              value="@DateTime.Now.ToString("yyyy-MM-dd")" oninput="CalcularValorRestante()">
+          </div>
+          <div class="mb-3">
+            <label for="Data_recolhimento" class="">Data de recolhimento:</label>
+            <input type="date" asp-for="@Model.NovaNota.DataRecolhimento" class="form-control" id="Data_recolhimento"
+              value="@DateTime.Now.ToString("yyyy-MM-dd")" oninput="CalcularValorRestante()">
+
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="produto" class="form-label">Produtos solicitados:</label>
+
+          @* caso seja feito a api, será necessário tratar esses dados para serem encaminhados para a asp-controller *@
+
+          @for (int i = 0; i < @Model.Pedidos.Count; i++)
+
+          {
+            @for (int j = 0; j < @Model.Estoque.Count; j++)
+
+            {
+              @if (@Model.Pedidos[i].IdProduto == @Model.Estoque[j].Id)
+              {
+                <label>@Model.Estoque[j].Nome</label>
+                <input type="hidden" asp-for="@Model.Pedidos[i].IdProduto" value="@Model.Pedidos[i].IdProduto">
+                <input type="hidden" asp-for="@Model.Pedidos[i].Quantidade" value="@Model.Pedidos[i].Quantidade">
+              }
+            }
+          }
+          <div class="mb-3 d-flex justify-content-evenly">
+            <div>
+              <label for="valor_total" class="form-label">Total:</label>
+              <input type="text" class="form-control" id="valor_total_visible" step="0.01" min="0" value="@Model.SubTotalPedido"
+                asp-for="@Model.NovaNota.ValorTotal" readonly>
+              <input type="hidden" class="form-control" id="valor_total" step="0.01" min="0" value="@Model.SubTotalPedido"
+                asp-for="@Model.NovaNota.ValorTotal" readonly>
+            </div>
+          </div>
+          <div class="mb-3 text-start d-flex flex-column">
+            <h4>Endereço</h4>
+            <div class="mb-3 d-flex justify-content-around">
+              <div class="w-100 pe-3">
+                <label for="CEP" class="form-label">CEP:</label>
+                <input type="number" asp-for="@Model.NovaNota.Cep" class="form-control" id="CEP">
+              </div>
+              <div class="w-100 pe-3">
+                <label for="Cidade" class="form-label">Cidade:</label>
+                <input type="text" asp-for="@Model.NovaNota.Cidade" class="form-control" id="Cidade">
+              </div>
+              <div class="w-100">
+                <label for="Bairro" class="form-label">Bairro:</label>
+                <input type="text" asp-for="@Model.NovaNota.Bairro" class="form-control" id="Bairro">
+              </div>
+              <div class="ms-3 w-100">
+                <label for="Rua" class="form-label">Rua / Logadouro:</label>
+                <input type="text" asp-for="@Model.NovaNota.Rua" class="form-control" id=rua>
+              </div>
+            </div>
+            <div class="mb-3 d-flex ">
+
+              <div class="w-100 pe-3">
+                <label for="numero" class="form-label">Número n°:</label>
+                <input type="number" asp-for="@Model.NovaNota.Numero" class="form-control" id="numero">
+              </div>
+              <div class="w-100">
+                <label for="Complemento" class="form-label">Complemento (Opcional):</label>
+                <input type="text" asp-for="@Model.NovaNota.Complemento" class="form-control" id="Complemento">
+              </div>
+
+              @if (@Model.Entrega)
+
+              {
+                <div class="form-check w-100">
+                  <label class="form-label" for="entregaMenos20">Valor de Entrega:</label>
+                  <input type="number" class="form-control" asp-for="@Model.NovaNota.TaxaEntrega" id="taxaEntrega" step="0.01" min="0" oninput="CalcularValorRestante()">
+                </div>
+              }
+
+              else
+
+              {
+                <div class="form-check w-100">
+                  <label class="form-label" for="entrega">Taxa de Entrega:</label>
+                  <input type="number" class="form-control" asp-for="@Model.NovaNota.TaxaEntrega" id="taxaEntrega" min="0" step="0.01" readonly>
+                </div>
+              }
+            </div>
+            <div class="d-flex justify-content-evenly mb-3">
+              <div>
+                <label class="form-label" for="pagPrevio">Pagamento Prévio</label>
+                <input class="form-control" id="pagPrevio" type="text" min="0" max="@Model.NovaNota.ValorTotal"
+                  step="0.01" value="@Model.NovaNota.ValorPago" asp-for="@Model.NovaNota.ValorPago" oninput="CalcularValorRestante()">
+              </div>
+              <div>
+                <label for="pagRestante" class="form-label">Pagamento Restante</label>
+                <input type="text" class="form-control" id="pagRestante" min="0" value="" readonly>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center gap-5">
+        <a href="@Url.Action("Index", "novoPedido")" class="btn btn-danger fs-3 Botao">Cancelar</a>
+        <button type="submit" class="btn btn-success fs-3 Botao">Enviar</button>
+      </div>
+      @if (TempData["Erro"] != null)
+      {
+        <div class="alert alert-danger">
+          @TempData["Erro"]
+        </div>
+      }
+    </form>
+
+  </div>

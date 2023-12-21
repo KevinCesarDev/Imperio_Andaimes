@@ -1,0 +1,99 @@
+﻿@model RelatorioModel
+@{
+    ViewData["Title"] = "Início";
+    MetodosInicioModel metodos = new MetodosInicioModel();
+}
+    <div class="Chart">
+        <div class="Card">
+            <p class="Title">A Recolher</p>
+            <div class="d-flex flex-wrap PedidoLista justify-content-center overflow-auto">
+                @foreach(var item in @Model.Notas){
+                <div>
+                    <div>
+                        <div class="card px-3 p-3 PedidoCard">
+                            <h5 class="card-title">Pedido n°: @item.Id</h5>
+                            <p class="card-text">Data Emissão: @item.DataEmissao.ToString("dd/MM/yyyy")</p>
+                            <p class="card-text">Data Recolhimento: @item.DataRecolhimento.ToString("dd/MM/yyyy")</p>
+                            <div class="status d-flex">
+                            <div class="d-flex">
+                            <a role="button" asp-action="VisualizarNota" asp-controller="ConsultarPedido" asp-route-id="@item.Id" class="btn btn-primary mt-3">Ver detalhes</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+            </div>
+            @if(@Model.Notas.Count < 1){
+                <div>
+                    <p class="Title fs-4">Nenhum item no momento</p>
+                </div>
+            }
+        </div>
+        <div class="Card">
+            <p class="Title">Estoque baixo</p>
+            <div class="d-flex flex-wrap PedidoLista justify-content-center overflow-auto">
+                    @foreach(var item in @Model.Estoque){
+                    <div>
+                    <div>
+                        <div class="card px-3 p-3 PedidoCard">
+                            <h5 class="card-title d-flex">@item.Nome</h5>
+                            <p class="card-text">Quantidade Disponível: @item.Disponiveis</p>
+                        </div>
+                    </div>
+                </div>}
+            </div>
+                    @if(!(@Model.Estoque.Count < 1)){
+                    <div class="d-flex justify-content-center">
+                        <a role="button" asp-action="Index" asp-controller="Estoque" class="btn btn-primary mt-3">Ver detalhes</a>
+                    </div>
+                    }else{
+                        <div>
+                            <p class="Title fs-4">Nenhum item no momento</p>
+                        </div>
+                    }
+        </div>
+    </div>
+@* <div class="container-fluid text-center d-flex align-items-center justify-content-center w-100 px-0 Chart">
+    <div class="grid w-100 d-flex h-100 Card" style="--bs-columns: 4;">
+        <div class="g-col-6 recolher h-100 d-flex justify-content-center flex-column h-100 w-100 d-flex align-items-center">
+            <p class="h2 mb-5">A recolher</p>
+            <div class="row d-flex w-100">
+                @foreach(var item in @Model.Notas){
+                <div class="col w-100" style="padding-top: 10px;">
+                    <div class="card w-100">
+                        <div class="col g-col-6 g-col-md-4 card-body">
+                            <h5 class="card-title">Pedido n°: @item.Id</h5>
+                            <p class="card-text">Data Emissão: @item.DataEmissao.ToString("dd/MM/yyyy")</p>
+                            <p class="card-text">Data Recolhimento: @item.DataRecolhimento.ToString("dd/MM/yyyy")</p>
+                            <div class="status d-flex align-items-center justify-content-center">
+                            </div>
+                            <a role="button" asp-action="VisualizarNota" asp-controller="ConsultarPedido" asp-route-id="@item.Id" class="btn btn-primary mt-3">Ver detalhes</a>
+                            
+                        </div>
+                    </div>
+                </div>}
+            </div>
+        </div>
+        </div>
+        <div
+            class="g-col-6 pagPendente d-flex justify-content-center flex-column h-100 w-100 d-flex align-items-center Card">
+            <p class="h2 mb-5">Estoque Baixo</p>
+            <div class="row d-flex w-100">
+                <div class="col w-100" style="padding-top: 10px;">
+                    @foreach(var item in @Model.Estoque){
+                    <div class="card w-100">
+                        <div class="card-body">
+                                
+                                <h5 class="card-title">@item.Nome</h5>
+                                <p class="card-text">Quantidade Disponível: @item.Disponiveis</p>
+                                
+                            <div class="status d-flex align-items-center justify-content-center">
+                            </div>
+
+                        </div>
+                    </div>}
+                    <a role="button" asp-action="Index" asp-controller="Estoque" class="btn btn-primary mt-3">Ver detalhes</a>
+                </div>
+            </div>
+        </div>
+    </div> *@

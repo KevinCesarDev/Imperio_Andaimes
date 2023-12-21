@@ -1,0 +1,52 @@
+@model RelatorioModel
+@{
+    ViewData["Title"] = "Resultado Relatório";
+}
+
+<div class="Card">
+    <p class="Title">Resultado do Relatório</p>
+    <div class="text-center Relatorio px-4 p-4 fs-5 container w-50 overflow-auto">
+    <div class="d-flex justify-content-center flex-wrap">
+        <div class="me-2 d">
+            <label class="form-label ">Data Inicial</label>
+            <input class="form-control text-center" type="date" value="@Model.DataInicial.ToString("yyyy-MM-dd")" readonly>
+        </div>
+        <div>
+            <label class="form-label me-2">Data Final</label>
+            <input type="date" class="form-control" value="@Model.DataFinal.ToString("yyyy-MM-dd")" readonly>
+        </div>
+    </div>
+    <div>
+        <label for="TotalVendas" class="form-label">Valor de Vendas Bruto em R$: </label>
+        <input class="form-control text-center" type="text" value="@Model.ValorTotalVendas" readonly>
+    </div>
+    <div><label class="form-label">Quantidade de Notas Geradas</label>
+    <input type="number" class="form-control text-center" value="@Model.Notas.Count" readonly>
+    </div>
+        <div><label class="form-label">Notas Abertas</label>
+        <input type="number" class="form-control text-center" value="@Model.NotasAbertas" readonly>
+        </div>
+        <div><label class="form-label">Notas Fechadas</label>
+        <input type="number" class="form-control text-center" value="@Model.NotasFechadas" readonly>
+        </div>
+    <div>
+        <p>Produtos mais Alugados: </p>
+        @for (int i = 0; i < @Model.TopProdutos.Count; i++)
+        {
+            for (int j = 0; j < @Model.Estoque.Count; j++)
+            {
+                if (@Model.TopProdutos[i].IdProduto == @Model.Estoque[j].Id)
+                {
+                    <div class=" ">
+                        <label class="form-label">@Model.Estoque[j].Nome</label>
+                        <input class="form-control text-center" value="@Model.TopProdutos[i].Quantidade" readonly>
+                    </div>
+                }
+            }
+        }
+        <div class="d-flex justify-content-center">
+                        <a role="button" asp-action="Index" asp-controller="Relatorio" class="btn btn-primary mt-3 fs-4">Gerar outro relatório</a>
+                    </div>
+    </div>
+</div>
+</div>

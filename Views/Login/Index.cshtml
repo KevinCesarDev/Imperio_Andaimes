@@ -1,0 +1,61 @@
+@model UsuarioModel
+@{
+    var titulo = "Império dos Andaimes";
+    Layout = null;
+    ViewData["Title"] = "Login";
+}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="KOÍOS LTDA">
+    <title>@titulo - @ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TCC.styles.css" asp-append-version="true" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="~/js/site.js"></script>
+    <link rel="icon" href="@Url.Content("~/img/andaime.svg")">
+    <title>@titulo - @ViewData["Title"]</title>
+</head>
+<body class="h-100">
+    <div class="LoginContainer d-flex h-100">
+                <div class="Background ">
+                    <img class="SVG" src="@Url.Content("~/img/forma1.svg")" width="32" alt="Home">
+                    <img class="SVG2" src="@Url.Content("~/img/forma2.svg")" width="32" alt="Home">
+                </div>
+            <div class="LeftInformations">
+                <div class="Main">
+                    <p class="TelaLoginTitle">Império dos Andaimes</p>
+                    <div class="Textos">
+                        <p class="Descricao">Bem-vindo ao +STOCK <br> sistema de controle de estoque do Império dos Andaimes</p>
+                        <p class="Descricao">Por favor, efetue o login para continuar</p>
+                    </div>
+                </div>
+            </div>
+            <div class="RightInformation d-flex h-100 align-items-center">
+                <div class="w-100 d-flex justify-content-center">
+                    <div class="LogoPosition d-flex justify-content-center flex-column align-items-center">
+                        <div class="Logo d-flex justify-content-center">
+                            <img class="" src="@Url.Content("~/img/Stock+.svg")" width="96" alt="Logo">
+                        </div>
+                            <p class="Stock fs-3 text-white desktop">STOCK</p>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <form class="Form mt-5 w-100" asp-action="ValidarLogin" asp-controller="Login">
+                        <p class="LoginTitle text-center">Login</p>
+                        <label for="username" class="Label">E-mail:</label>
+                        <input type="email" class="Input" id="emailLogin" asp-for="@Model.EmailUsuario">
+                        <label for="senha" class="Label">Senha:</label>
+                        <input type="password" class="Input" id="senhaLogin" asp-for="@Model.Senha">
+                        <button class="BotaoLogin" type="submit">Login</button>
+                        <p class="text-center fs-5 text-white Stock desktop" id="Subtitle">Seu gerenciamento de forma simples</p>
+                        <p class="text-center fs-4 Erro" id="Subtitle">@TempData["Erro"]</p>
+                        </form>
+                    </div>
+                </div>
+                <div class="RightDetails"/>
+            </div>
+    </div>
+</body>

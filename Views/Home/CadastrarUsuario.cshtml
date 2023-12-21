@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Cadastrar";
+    
+}
+
+<div class="Card">
+    <p class="Title text-center">Cadastrar novo usuário</p>
+    <form method="post" onsubmit="return verificarCadastro()" asp-action="Cadastrar" asp-controller="Home">
+        <div class="container Over p-3">
+            <div class="mb-3">
+                <label for="nome" class="form-label fs-5 Roboto">Nome:</label>
+                <input type="text" class="form-control fs-5" id="nome" name="nome">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label fs-5 Roboto">E-mail:</label>
+                <input type="email" class="form-control fs-5" id="email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="confirmarEmail" class="form-label fs-5 Roboto">Confirmar e-mail:</label>
+                <input type="email" class="form-control fs-5" id="confirmarEmail" name="confirmarEmail">
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label fs-5 Roboto">Senha:</label>
+                <input type="password" class="form-control fs-5" id="senha" name="senha">
+            </div>
+            <div class="mb-3">
+                <label for="confirmarSenha" class="form-label fs-5 Roboto">Confirmar senha:</label>
+                <input type="password" class="form-control fs-5" id="confirmarSenha" name="confirmarSenha">
+            </div>
+            <div class="mb-3 d-flex flex-column">
+                <label for="tipoConta" class="form-label fs-5 Roboto">Tipo de conta:</label>
+                <select class="form-label fs-5 Roboto text-center" id="tipoConta" name="tipoConta">
+                    <option value="Funcionario">Funcionário</option>
+                    <option value="Administrador">Administrador</option>
+                </select>
+            </div>
+            <div class="botoes d-flex justify-content-between">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Cadastrar</button>
+            </div>
+        </div>
+    </form>
+</div>

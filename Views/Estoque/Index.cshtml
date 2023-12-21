@@ -1,0 +1,210 @@
+@model List<EstoqueModel>
+@{
+    ViewData["Title"] = "Estoque";
+}
+
+<div class="text-center Card">
+    <p class="Title">Lista de Estoque</p>
+    @if (@TempData["Erro"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["Erro"]
+        </div>
+    }
+    <div class="d-flex w-100 overflow-auto">
+        <table class="container table table-bordered ContainerMobile">
+            <thead>
+                <tr class=" bg-secondary text-white">
+                    <th class="desktop">Nome</th>
+                    <th class="desktop">Quantidade total</th>
+                    <th class="desktop">Alugados</th>
+                    <th class="desktop">Disponíveis</th>
+                    <th class="desktop">Valor unidade</th>
+                    @if(ViewBag.TipoConta == "Administrador"){
+                        <th class="desktop">Ação</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @if(item.ProdutoAtivo == true){
+                        
+                        <tr class="align-items-center bg-light">
+                        <td>
+                            <p class="desktop mb-0">@item.Nome</p>
+                            <div class="accordion accordion-flush mobile" id="accordionFlushExample">
+                                <div class="accordion-item mobile">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed text-center" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-@item.Id"
+                                            aria-expanded="false" aria-controls="flush-collapseOne-@item.Id">
+                                            <p>@item.Nome</p>
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne-@item.Id" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <p>Quantidade total: @item.QuantidadeTotal</p>
+                                            <p>Alugados: @item.Alugados</p>
+                                            <p>Disponíveis: @item.Disponiveis</p>
+                                            <p>Valor unidade: R$ @item.ValorUnid</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="desktop">
+                            @item.QuantidadeTotal
+                        </td class="desktop">
+                        <td class="desktop">
+                            @item.Alugados
+                        </td>
+                        <td class="desktop">
+                            @item.Disponiveis
+                        </td>
+                        <td class="desktop">
+                            R$ @item.ValorUnid
+                        </td>
+                            @if(ViewBag.TipoConta == "Administrador"){
+                        <td class="gap-2 d-flex flex-wrap align-items-center justify-content-between">
+                            <a role="button" class="btn btn-primary w-100" asp-action="EditarProduto"
+                                asp-controller="Estoque" asp-route-id="@item.Id">Editar</a>
+                                @if(item.Alugados > 0 ){
+                                    <button type="button" class="btn btn-dark w-100" data-bs-toggle="modal"
+                                        data-bs-target="#desabilitarModal-@item.Id">
+                                        Desabilitar
+                                    </button>
+                                }else{
+                                    <button type="button" class="btn btn-danger w-100" data-bs-toggle="modal"
+                                        data-bs-target="#excluirModal-@item.Id">
+                                        Excluir
+                                    </button>
+                                }
+                            
+                            <div class="modal fade" id="excluirModal-@item.Id" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="excluirModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h1 class="modal-title fs-5" id="excluirModalLabel-@item.Id">Tem certeza que
+                                                deseja excluir<br>
+                                                <p style="color: var(--error);">"@item.Nome"?</p>
+                                            </h1>
+                                        </div>
+                                        <div class="modal-body d-flex justify-content-center gap-4">
+                                            <form asp-action="ExcluirProduto" asp-controller="Estoque"
+                                                asp-route-id="@item.Id" method="post">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Não</button>
+                                                <button class="btn btn-success" type="submit">Sim</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="desabilitarModal-@item.Id" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="desabilitarModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h1 class="modal-title fs-5" id="desabilitarModalLabel-@item.Id">Tem certeza que
+                                                deseja desabilitar<br>
+                                                <p style="color: var(--highlight-3);">"@item.Nome"?</p>
+                                            </h1>
+                                        </div>
+                                        <div class="modal-body d-flex justify-content-center gap-4">
+                                            <form asp-action="ExcluirProduto" asp-controller="Estoque"
+                                                asp-route-id="@item.Id" method="post">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Não</button>
+                                                <button class="btn btn-success" type="submit">Sim</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>}
+                    </tr>
+                    }else if(item.Alugados > 0 && item.ProdutoAtivo == false){
+                        <tr class="align-items-center text-muted">
+                        <td>
+                            <p class="desktop mb-0">@item.Nome</p>
+                            <div class="accordion accordion-flush mobile" id="accordionFlushExample">
+                                <div class="accordion-item mobile">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed text-center" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapseOne-@item.Id"
+                                            aria-expanded="false" aria-controls="flush-collapseOne-@item.Id">
+                                            <p>@item.Nome</p>
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseOne-@item.Id" class="accordion-collapse collapse"
+                                        data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body">
+                                            <p>Quantidade total: @item.QuantidadeTotal</p>
+                                            <p>Alugados: @item.Alugados</p>
+                                            <p>Disponíveis: @item.Disponiveis</p>
+                                            <p>Valor unidade: R$ @item.ValorUnid</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="desktop">
+                            @item.QuantidadeTotal
+                        </td class="desktop">
+                        <td class="desktop">
+                            @item.Alugados
+                        </td>
+                        <td class="desktop">
+                            @item.Disponiveis
+                        </td>
+                        <td class="desktop">
+                            R$ @item.ValorUnid
+                        </td>
+                            @if(ViewBag.TipoConta == "Administrador"){
+                        <td class="gap-2 d-flex flex-wrap align-items-center justify-content-between">
+                                <button type="button" class="btn btn-outline-dark w-100 Reabilitar" data-bs-toggle="modal"
+                                    data-bs-target="#habilitarModal-@item.Id">
+                                     Habilitar
+                                </button>
+                            <div class="modal fade" id="habilitarModal-@item.Id" data-bs-backdrop="static"
+                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="habilitarModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header d-flex justify-content-center">
+                                            <h1 class="modal-title fs-5" id="habilitarModalLabel-@item.Id">Tem certeza que
+                                                deseja habilitar<br>
+                                                <p style="color: var(--success);">"@item.Nome"?</p>
+                                            </h1>
+                                        </div>
+                                        <div class="modal-body d-flex justify-content-center gap-4">
+                                            <form asp-action="HabilitarProduto" asp-controller="Estoque"
+                                                asp-route-id="@item.Id" method="post">
+                                                <button type="button" class="btn btn-danger"
+                                                    data-bs-dismiss="modal">Não</button>
+                                                <button class="btn btn-success" type="submit">Sim</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        }
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if(ViewBag.TipoConta == "Administrador"){
+    <div class="d-flex justify-content-end">
+        <a role="button" class="btn btn-success" asp-action="AddProduto"
+            asp-controller="Estoque">Adicionar Produto</a>
+            </div>
+    }
+</div>

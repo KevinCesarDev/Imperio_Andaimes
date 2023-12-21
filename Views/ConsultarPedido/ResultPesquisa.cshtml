@@ -1,0 +1,88 @@
+@model EstoquePedidoNotaModel
+@{
+    ViewData["Title"] = "Consulta";
+}
+
+<head>
+    <style>
+        input,
+        textarea,
+        select {
+            outline: 0;
+        }
+    </style>
+</head>
+
+<div class="d-flex flex-column w-100">
+    <div class="Card">
+    <div class="text-center d-flex justify-content-center w-100 row">
+    <p class="Title text-center">Consultar nota</p>
+    <form method="post" asp-action="ConsultaNota" asp-controller="ConsultarPedido">
+                <select id="filtros" onchange="verificarFiltro('filtros')"
+                    class="Roboto rounded-pill Filter align-self-center fs-5 btn-outline-dark mb-4" name="opc">
+                    <option value="CPF/CNPJ">CPF/CNPJ</option>
+                    <option value="NNota">Nº Nota</option>
+                    <option value="Cliente">NOME CLIENTE</option>
+                    <option value="Tel">TELEFONE</option>
+                    <option value="Periodo">PERÍODO</option>
+                    <option value="CEP">CEP</option>
+                </select>
+        <div class="d-flex justify-content-center align-items-center">
+                <div class="d-flex gap-4">
+                    <div id="barraPesquisa" class="input-group">
+                        <input name="busca" type="search"
+                        id="pesquisa" class="form-control rounded fs-5" placeholder="Pesquisar" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-outline-dark fs-5" data-mdb-ripple-init>search</button>
+                    </div>
+                    <div class="d-flex gap-4">
+                            <div id="barraPeriodo" class="None gap-4 flex-column">
+                                    <div class="d-flex gap-4 RelatorioBusca">
+                                        <div class="d-flex flex-column">
+                                        <label class="me-2 fs-5" for="dataInicial">Data Inicial:</label>
+                                        <input class="px-4 p-1 fs-5" type="date" id="dataIncial" name="dataInicial">
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <label class="me-2 fs-5" for="dataFinal">Data Final:</label>
+                                        <input class="px-4 p-1 fs-5" type="date" id="dataFinal" name="dataFinal">
+                                    </div>
+                                </div>
+                            <button type="submit" class="btn btn-outline-dark fs-5" data-mdb-ripple-init>search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+@if(Model.ListaNotas.NotasEncontradas.Any()){
+      <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">Nº Nota</th>
+                    <th scope="col" class="text-center">CPF/CNPJ</th>
+                    <th scope="col" class="text-center">Cliente</th>
+                    <th scope="col" class="text-center"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in @Model.ListaNotas.NotasEncontradas)
+                {
+                    <tr>
+                        <th class="text-center" scope="row">@item.Id</th>
+                        <td class="text-center">@item.CPF_CNPJ</td>
+                        <td class="text-center">@item.Nome</td>
+                        <td class="d-flex justify-content-center w-100">
+                            <a role="button" class="btn btn-primary" asp-action="VisualizarNota" asp-controller="ConsultarPedido" asp-route-id="@item.Id">
+                                Visualizar
+                                </a>
+                            </td>
+                    </tr>
+                    
+                }
+            </tbody>
+        </table>
+    }
+    else{
+        <h1 class="text-center">Nota não encontrada</h1>
+    }
+</div>

@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Conta";
+}
+
+<div class="Card">
+    <p class="Title">Informações da conta</p>
+    <div class="container d-flex justify-content-center Over flex-column">
+        <div class="Nome">
+            <p class="fs-3 text-center Bold">Nome:</p>
+            <p class="fs-4 text-center">@ViewBag.NomeCompleto</p>
+        </div>
+        <div class="Email">
+            <p class="fs-3 text-center Bold">E-mail:</p>
+            <p class="fs-4 text-center">@ViewBag.Email</p>
+        </div>
+        <div class="TipoConta">
+            <p class="fs-3 text-center Bold">Tipo de conta:</p>
+            <p class="fs-4 text-center">@ViewBag.tipoConta</p>
+        </div>
+        <div class="d-flex justify-content-center mb-4 desktop">
+            <a asp-action="AlterarDados" asp-controller="Home" class="btn btn-outline-dark fs-3">Alterar dados</a>
+        </div>
+        <div class="d-flex justify-content-center mb-4 mobile">
+            <a asp-action="AlterarDados" asp-controller="Home" class="btn btn-dark fs-3">Alterar dados</a>
+        </div>
+    </div>
+</div>

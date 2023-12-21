@@ -1,0 +1,30 @@
+@model EstoqueModel
+@{
+    ViewData["Title"] = "Novo Produto";
+}
+<div class="Card">
+    <p class="Title">Adicionar Produto</p>
+    <div classe="d-flex justify-content-center w-100">
+    <form asp-action="ValidarNovoProd" asp-controller="Estoque">
+        <div class="mb-3">
+            <label for="nomeProduto" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="nomeProduto" placeholder="Nome do Produto"
+                asp-for="@Model.Nome">
+        </div>
+        <div class="mb-3">
+            <label for="qtdTotal" class="form-label">Quantidade Total:</label>
+            <input type="number" class="form-control" id="qtdTotal" placeholder="Quantidade"
+                asp-for="@Model.QuantidadeTotal" min="@Model.Alugados">
+        </div>
+        <div>
+            <label for="valorDiaria" class="form-label">Valor Diária:</label>
+            <input type="number" step="0.01" class="form-control" id="valorDiaria" placeholder="Valor" asp-for="@Model.ValorUnid"
+                min="0">
+        </div>
+        <div class="d-flex justify-content-between">
+            <a role="button" asp-controller="Estoque" asp-action="Index" class="btn btn-danger mt-3">Cancelar</a>
+            <button type="submit" class="btn btn-success mt-3">Confirmar</button>
+        </div>
+    </form>
+</div>
+</div>
